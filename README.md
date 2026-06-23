@@ -20,7 +20,9 @@ in your code as actual environment variables.
 **2.BeautifulSoup**
 Beautiful Soup (often called BS4) is a popular Python library used for web scraping and parsing HTML and XML files.
 It takes raw, messy webpage data and translates it into a structured, easily navigable object, allowing developers 
-to quickly extract specific information like text, links, and tables
+to quickly extract specific information like text, links, and tables.
+
+
 
 ## What I learned building this
 
@@ -93,15 +95,19 @@ Naming things properly matters. You won't make this mistake again.
 ---
 
 **DAY-02**
-Get one article title + its AI-generated 2-line summary printing in your terminal. Just one. Not ten. Not the full app. One working summary.
-Start with the Gemini test file — come back when it prints a summary. 👀
+**VENV built**
+I built a new venv 
+1.open python interpretar
+2.create new environment
+3.and than install all the libraries
+pip install requests beautifulsoup4 google-genai python-dotenv
+4.venv is cretaed for that project SEPERATELY
 
 Take your `articles` list → fetch each article page → extract the article body text → send to Gemini API → get a 2-line summary back.
-That's the AI part. Sleep well. 👀
 
 **Today's plan — the AI summarization step:**
 
-**Step 1 — Get Gemini API key (10 mins)**
+**Step 1 — Get Gemini API key**
 
 Go to **aistudio.google.com** → Sign in with Google → create a new project just put it's name  → Get API key → Copy it → Add to your `.env` file:
 ```
@@ -110,13 +116,13 @@ GEMINI_API_KEY=your_key_here
 
 **Step 2 — Install the library:**
 ```
-pip install google-generativeai
+pip install google-genai
 ```
 
 **Step 3 — Test Gemini first (separate file `test_gemini.py`):**
 
 ```python
-import google.generativeai as genai #old change it to from google import genai
+from google import genai
 import os
 from dotenv import load_dotenv
 
@@ -139,34 +145,33 @@ In modern SDK(An SDK, or Software Development Kit, is a comprehensive toolkit th
 **Step 4 — Add summarization to scraper.py:**
 
 Once Gemini test works, add this function:
-
+This part works like this go to the article of url -> send to gemini -> summarized
 ```python
 def summarize(title, url):
     try:
-        # fetch article page
-        response = requests.get(url, headers=headers, timeout=10)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # extract article text (paragraphs)
-        paragraphs = soup.find_all('p')
-        article_text = ' '.join([p.text for p in paragraphs[:10]])
-        
-        # send to Gemini
-        prompt = f"Summarize this news article in exactly 2 sentences: {article_text[:2000]}"
-        result = model.generate_content(prompt)
-        return result.text
-        
+       response=requests.get(url,headers=headers, timeout=10)
+       soup=BeautifulSoup(response.text,'html.parser')
+    #extract article text
+       paragraphs=soup.find_all('p')
+       article_text = ' '.join([p.text for p in paragraphs[:10]])
+    #send to Gemini
+       result = client.models.generate_content(
+       model = 'gemini-2.5-flash',
+       contents=f"Summarize this in 2 lines:{article_text[:2000]}")
+
+       return result.text
     except Exception as e:
-        return "Summary not available"
+       return f"Summary not available: {e}"
 ```
 
 **Step 5 — Connect to your articles list:**
 
 ```python
-for article in articles[:5]:  # start with 5 to save API quota
-    print(f"Title: {article['title']}")
-    summary = summarize(article['title'], article['url'])
-    print(f"Summary: {summary}")
-    print()
+for article in articles[:3]:
+    print(f"title:{article['title']}")
+    Summary=summarize(article['url'],article['title'])
+    print(f"Summary:{Summary}")
+    print(f"Link:{article['url']}")
+    print("-" * 50)
 ```
 
