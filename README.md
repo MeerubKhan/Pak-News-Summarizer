@@ -22,11 +22,17 @@ Beautiful Soup (often called BS4) is a popular Python library used for web scrap
 It takes raw, messy webpage data and translates it into a structured, easily navigable object, allowing developers 
 to quickly extract specific information like text, links, and tables.
 
+**3.smtplib**
+is a built-in Python module that allows you to send emails programmatically from your applications. It implements the Simple Mail Transfer Protocol (SMTP), letting your code connect to a mail server, authenticate, and route messages across the internet.
+
+**4.SSL/TSL**
+SSL (Secure Sockets Layer) is the standard security technology for establishing an encrypted link between a web server and a browser. It ensures that all data passed between the two remains private and safe from interception.While the term "SSL" is still widely used, the actual technology protecting modern websites is TLS (Transport Layer Security), which is simply a more secure and updated version of SSL.
 
 
 ## What I learned building this
 
-**DAY-01**
+**DAY-01 TASKS AND LEARNINGS**
+
 **Web Scraping with BeautifulSoup**
 You learned how to send an HTTP request to a real website and parse its HTML. This is how data is extracted from the internet without an official API — a skill used daily in data engineering, automation, and research roles.
 
@@ -91,17 +97,23 @@ You caught and understood a classic mistake — using the same variable name for
 headlines = soup.find_all(...)
 for i, headlines in enumerate(...):  # ❌ overwrote the list
 ```
-Naming things properly matters. You won't make this mistake again.
----
+**Naming things properly matters. You won't make this mistake again.
+**---
 
-**DAY-02**
+**DAY-02 TASKS AND LEARNINGS**
+
 **VENV built**
-I built a new venv 
+I built a new venv
+
 1.open python interpretar
+
 2.create new environment
+
 3.and than install all the libraries
 pip install requests beautifulsoup4 google-genai python-dotenv
+
 4.venv is cretaed for that project SEPERATELY
+
 
 Take your `articles` list → fetch each article page → extract the article body text → send to Gemini API → get a 2-line summary back.
 
@@ -174,4 +186,18 @@ for article in articles[:3]:
     print(f"Link:{article['url']}")
     print("-" * 50)
 ```
+**DAY-03 TASKS AND LEARNINGS**
 
+**Step 1** — Get Gmail App Password (10 mins)
+You can't use your regular Gmail password in code — Google blocks it for security. You need an "App Password":
+
+Go to myaccount.google.com →
+Click Security →
+Enable 2-Step Verification if not already on →
+Search "App passwords" in the search bar →
+Create one → name it news-summarizer →
+Copy the 16-character password it gives you
+
+Add to your .env file:
+GMAIL_PASSWORD=your16charpassword
+GMAIL_USER=meerub.sk@gmail.com
