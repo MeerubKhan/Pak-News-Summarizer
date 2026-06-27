@@ -199,5 +199,15 @@ Create one → name it news-summarizer →
 Copy the 16-character password it gives you
 
 Add to your .env file:
-GMAIL_PASSWORD=your16charpassword
+GMAIL_PASSWORD
 GMAIL_USER=meerub.sk@gmail.com
+
+1.The email body is made by making an email body function and after that use the loop to access articles_with_summaries list and in that list use **'email_body+='**
+
+**DAY_04**
+The projects gets built .... everything's done. 
+**Automation will be done after docker image is built**
+Docker steps:
+Step 1: Create a requirements.txt file
+pip freeze > requirements.txt
+Step 2: Create your Dockerfile
