@@ -211,3 +211,11 @@ Docker steps:
 Step 1: Create a requirements.txt file
 pip freeze > requirements.txt
 Step 2: Create your Dockerfile
+Step 3: create image 
+docker build -t pak-news-summarizer .
+Step 4: run it 
+docker run pak-news-summarizer .
+
+**Day_05**
+There is this git problem I have. I come to know today git and git hub are seperate things
+just watch a git tutorial do not make ur own moves
