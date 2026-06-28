@@ -218,4 +218,4 @@ docker run pak-news-summarizer .
 
 **Day_05**
 There is this git problem I have. I come to know today git and git hub are seperate things
-just watch a git tutorial do not make ur own moves
+just watch a git tutorial do not make ur own moves.
