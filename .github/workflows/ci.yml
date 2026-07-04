@@ -19,6 +19,18 @@ jobs:
 
        - name: Install dependencies
          run: pip install -r requirements.txt
+        
+        #similar to docker login 
+       - name: Log in to Docker Hub
+         uses: docker/login-action@v3
+         with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+        #Build the image Instead of: docker build -t pak-news-summarizer 
        - name: Build Docker image
-         run: docker build -t pak-news-summarizer .
+         run: docker build -t meerubsk/pak-news-summarizer:latest .
+
+        #Push the image
+       - name: Push Docker image
+         run: docker push meerubsk/pak-news-summarizer:latest

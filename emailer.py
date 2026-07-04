@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 def send_digest(articles_with_summaries):
     sender=os.getenv('GMAIL_USER')
-    receiver="hamidsaeed@gmail.com"
+    receiver="naairah.haziq@gmail.com"
     password=os.getenv('GMAIL_PASSWORD')
 
 #create email message structure
