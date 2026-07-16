@@ -75,7 +75,7 @@ for article in articles[:3]:
 
 # send email
 send_digest(articles_with_summaries)
-
+print("CI/CD Demo")
 
 
 
